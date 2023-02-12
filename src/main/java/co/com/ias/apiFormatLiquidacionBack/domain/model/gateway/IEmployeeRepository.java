@@ -8,6 +8,8 @@ public interface IEmployeeRepository {
 
     Employee saveEmployee(Employee employee);
 
+    Employee saveEmployee(Employee employee, List<Employee> employees);
+
     Employee updateEmployee(Employee employee);
 
     List<Employee> findAllEmployee();
