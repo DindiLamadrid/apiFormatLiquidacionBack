@@ -19,18 +19,10 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     private final IEmployeeRepositoryAdapter iEmployeeRepositoryAdapter;
 
 
-    @Override
-    public Employee saveEmployee(Employee employee) {
-        return null;
-    }
 
     @Override
-    public Employee saveEmployee(Employee employee, List<Employee> employees) {
+    public Employee saveEmployee(Employee employee) {
         EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employee);
-        if (!employees.isEmpty()) {
-            List<EmployeeDBO> employeesDBO = employees.stream().map(EmployeeDBO::fromDomain).collect(Collectors.toList());
-            employeeDBO.setEmployeesList(employeesDBO);
-        }
         EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(employeeDBO);
         return EmployeeDBO.toDomain(employeeSaved);
     }
@@ -40,7 +32,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
         EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
         Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getId());
         if (elementFound.isEmpty()){
-            throw new NullPointerException("Employee not exist with id: " + employee.getId().getClass());
+            throw new NullPointerException("Employee not exist with id: " + employee.getDocument().getClass());
 
         } else {
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
@@ -49,7 +41,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     }
 
     @Override
-    public Employee findEmployeeById(Long id) {
+    public Employee findEmployeeById(String id) {
         Optional<EmployeeDBO> dbo = iEmployeeRepositoryAdapter.findById(id);
         if (dbo.isEmpty()) {
             throw new NullPointerException("Not exist employee with id: " + id);
@@ -64,7 +56,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     }
 
     @Override
-    public Boolean deleteEmployee(Long id) {
+    public Boolean deleteEmployee(String id) {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<EmployeeDBO> dbo = iEmployeeRepositoryAdapter.findById(id);
         dbo.ifPresent(value -> {

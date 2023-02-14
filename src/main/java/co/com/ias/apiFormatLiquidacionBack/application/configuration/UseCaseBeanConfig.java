@@ -11,7 +11,7 @@ public class UseCaseBeanConfig {
 
     @Bean
     public EmployeeUseCase employeeUseCase(IEmployeeRepository iEmployeeRepository){
-        return new EmployeeUseCase(iEmployeeRepository, (IEmployeeRepositoryAdapter) iEmployeeRepository);
+        return new EmployeeUseCase(iEmployeeRepository);
     }
 
 }

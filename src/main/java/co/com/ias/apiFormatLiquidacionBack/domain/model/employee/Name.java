@@ -1,4 +1,4 @@
-package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo;
+package co.com.ias.apiFormatLiquidacionBack.domain.model.employee;
 
 import org.springframework.util.Assert;
 
@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 
 import static org.springframework.util.Assert.notNull;
 
-public class EmployeeJobDBO {
+public class Name {
     private final String value;
 
-    public EmployeeJobDBO(String value) {
+    public Name(String value) {
         notNull(value, "The name cannot be empty");
-        Assert.isTrue(value.length() <= 15, "Maximum size of 15 digits");  // cambiarlo para que deje solo un maximo de 15 digitos y crear el de minimo 7 digitos
+        Assert.isTrue(value.length() <= 50, "The name must not exceed 50 characters");
         Assert.isTrue(Pattern.matches("^[A-z\\s]+(?<!\\s)$", value), "The name can only contain letters");
         this.value = value;
     }
@@ -19,4 +19,5 @@ public class EmployeeJobDBO {
     public String getValue() {
         return value;
     }
+
 }

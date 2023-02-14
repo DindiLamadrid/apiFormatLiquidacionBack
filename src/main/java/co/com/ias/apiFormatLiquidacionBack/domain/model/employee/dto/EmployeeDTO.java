@@ -1,72 +1,85 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.*;
-import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeValue;
+import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
-import java.util.List;
+import java.time.LocalDate;
 
+@NoArgsConstructor
 public class EmployeeDTO {
 
     private String name;
-    private Long id;
-    private String startDate;
+    private String document;
+    private LocalDate startDate;
     private String job;
     private String salary;
-    private String value;
-    private List<Long> employeesId;
 
-
-
-    public EmployeeDTO(Long id, String name, String startDate, String job, String salary, String value, List<Long> employeesId) {
+    public void setName(String name) {
         this.name = name;
-        this.id = id;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public EmployeeDTO(String document, String name, LocalDate startDate, String job, String salary) {
+        this.name = name;
+        this.document = document;
         this.startDate = startDate;
         this.job = job;
         this.salary = salary;
-        this.employeesId = employeesId;
-        this.value = value;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public String getStartDate(){
-        return startDate;
-    }
-
-    public String getJob(){
-        return job;
-    }
-
-    public String getSalary(){
-        return salary;
-    }
-
-    public String getValue(){
-        return value;
-    }
-
-    public List<Long> getEmployeesId() {
-        return employeesId;
-    }
-
-    public Employee toDomain(EmployeeDTO employeeDTO) {
-        return new Employee(
-                employeeDTO.getName(), employeeDTO.getId(), employeeDTO.getStartDate());
     }
 
     public static EmployeeDTO fromDomain(Employee employee) {
-        return new EmployeeDTO(employee.getId(),
-                employee.getName(),
-                employee.getStartDate(),
-                employee.getJob(),
-                employee.getSalary(),
-                employee.getValue(),
-                employee.getEmployeesId());
+        return new EmployeeDTO(employee.getDocument().getValue(),
+                employee.getName().getValue(),
+                employee.getStartDate().getValue(),
+                employee.getJob().getValue(),
+                employee.getSalary().getValue());
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+
+    public Employee toDomain(EmployeeDTO employeeDTO) {
+        return new Employee(
+                new Document(employeeDTO.getDocument()),
+                new Job(employeeDTO.getJob()),
+                new Name(employeeDTO.getName()),
+                new Salary(employeeDTO.getSalary()),
+                new StartDate(employeeDTO.getStartDate()));
+    }
+
+
 }

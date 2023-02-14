@@ -8,14 +8,12 @@ public interface IEmployeeRepository {
 
     Employee saveEmployee(Employee employee);
 
-    Employee saveEmployee(Employee employee, List<Employee> employees);
-
     Employee updateEmployee(Employee employee);
 
     List<Employee> findAllEmployee();
 
-    Boolean deleteEmployee(Long employee);
+    Boolean deleteEmployee(String employee);
 
-    Employee findEmployeeById(Long employee);
+    Employee findEmployeeById(String employee);
 
 }
