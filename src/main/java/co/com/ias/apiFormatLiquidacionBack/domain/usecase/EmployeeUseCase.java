@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class EmployeeUseCase {
     private final IEmployeeRepository iEmployeeRepository;
 
-    public EmployeeUseCase(IEmployeeRepository iEmployeeRepository, IEmployeeRepositoryAdapter iEmployeeRepositoryAdapter) {
+    public EmployeeUseCase(IEmployeeRepository iEmployeeRepository) {
         this.iEmployeeRepository = iEmployeeRepository;
     }
 

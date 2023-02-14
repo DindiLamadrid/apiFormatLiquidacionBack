@@ -27,10 +27,6 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     @Override
     public Employee saveEmployee(Employee employee, List<Employee> employees) {
         EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employee);
-        if (!employees.isEmpty()) {
-            List<EmployeeDBO> employeesDBO = employees.stream().map(EmployeeDBO::fromDomain).collect(Collectors.toList());
-            employeeDBO.setEmployeesList(employeesDBO);
-        }
         EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(employeeDBO);
         return EmployeeDBO.toDomain(employeeSaved);
     }
@@ -40,7 +36,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
         EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
         Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getId());
         if (elementFound.isEmpty()){
-            throw new NullPointerException("Employee not exist with id: " + employee.getId().getClass());
+            throw new NullPointerException("Employee not exist with id: " + employee.getDocument().getClass());
 
         } else {
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);

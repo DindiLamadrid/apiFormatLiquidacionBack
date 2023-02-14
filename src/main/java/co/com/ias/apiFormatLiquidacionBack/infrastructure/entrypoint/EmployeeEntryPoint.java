@@ -17,7 +17,7 @@ public class EmployeeEntryPoint {
 
     private final EmployeeUseCase employeeUseCase;
 
-    @GetMapping
+    @GetMapping("/getAllEmployees")
     public ResponseEntity<?> get() {
         List<EmployeeDTO> employee = employeeUseCase.findAllEmployees();
         if (employee.isEmpty()) {
@@ -32,12 +32,12 @@ public class EmployeeEntryPoint {
         return new ResponseEntity(employeeUseCase.findEmployeeById(id), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/createEmployee")
     public ResponseEntity<?> create(@RequestBody EmployeeDTO employeeDTO) {
         return new ResponseEntity(employeeUseCase.saveEmployee(employeeDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("/updateEmployee")
     public ResponseEntity<?> update(@RequestBody EmployeeDTO employeeDTO) {
         return new ResponseEntity(employeeUseCase.updateEmployee(employeeDTO), HttpStatus.OK);
     }

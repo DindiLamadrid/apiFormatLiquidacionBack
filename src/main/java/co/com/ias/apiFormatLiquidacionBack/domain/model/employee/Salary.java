@@ -2,17 +2,14 @@ package co.com.ias.apiFormatLiquidacionBack.domain.model.employee;
 
 import org.springframework.util.Assert;
 
-import java.util.regex.Pattern;
-
 import static org.springframework.util.Assert.notNull;
 
-public class EmployeeName {
+public class Salary {
     private final String value;
 
-    public EmployeeName(String value) {
+    public Salary(String value) {
         notNull(value, "The name cannot be empty");
-        Assert.isTrue(value.length() <= 50, "The name must not exceed 50 characters");
-        Assert.isTrue(Pattern.matches("^[A-z\\s]+(?<!\\s)$", value), "The name can only contain letters");
+        Assert.isTrue(value.length() <= 50, "The name must not exceed 50 characters");//Cambiar para salario máximo en 7 millones
         this.value = value;
     }
 
