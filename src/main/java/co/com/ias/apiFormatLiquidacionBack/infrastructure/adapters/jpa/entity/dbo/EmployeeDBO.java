@@ -1,11 +1,12 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Entity
 @Table(name = "Employee")
@@ -15,69 +16,85 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDBO {
-    public final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy/dd/MM");
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private String id;
-
+    private Long idEmployee;
+    private String document;
     private String name;
-    private String startDate;
+    private LocalDate startDate;
     private String job;
-    private String salary;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "salaryList")
+    @JsonIgnoreProperties("salaryList")
+    private List<SalaryDBO> salaryList;
 
-//		@ManyToMany(fetch = FetchType.LAZY,
-//				   cascade = {
-//						   CascadeType.PERSIST,
-//						   CascadeType.MERGE
-//		           },
-//			       mappedBy = "employeeList")
-//	@JsonIgnoreProperties("employeeList")
-//	@ManyToMany(mappedBy = "employeeList")
-//	@ManyToMany
-//	@JoinTable(
-//		name = "employee",
-//		joinColumns = @JoinColumn(name = "employee_id"),
-//		inverseJoinColumns = @JoinColumn(name = "employee_id"))
-//	private List<EmployeeDBO> employeesList;
 
+    public Long getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(Long id_employee) {
+        this.idEmployee = id_employee;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public void setDocument(String document) {
+        this.document = document;
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getId() {
-        return id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public String getJob() {
         return job;
     }
 
-    public String getSalary() {
-        return salary;
+    public void setJob(String job) {
+        this.job = job;
     }
 
+    public EmployeeDBO(Long idEmployee, String document, String name, LocalDate startDate, String job) {
+        this.idEmployee = idEmployee;
+        this.document = document;
+        this.name = name;
+        this.startDate = startDate;
+        this.job = job;
+    }
 
     public static Employee toDomain(EmployeeDBO employeeDBO) {
-        return new Employee(
-                new Document(employeeDBO.getId()),
+        return new Employee(employeeDBO.getIdEmployee(),
+                new Document(employeeDBO.getDocument()),
                 new Job(employeeDBO.getJob()),
                 new Name(employeeDBO.getName()),
-                new Salary(employeeDBO.getSalary()),
-                new StartDate(LocalDate.parse(employeeDBO.getStartDate())));
+                new StartDate(employeeDBO.getStartDate()));
     }
 
     public static EmployeeDBO fromDomain(Employee employee) {
-        return new EmployeeDBO(
+        return new EmployeeDBO(employee.getIdEmployee(),
                 employee.getDocument().getValue(),
                 employee.getName().getValue(),
-                employee.getStartDate().getValue().toString(),
-                employee.getJob().getValue(),
-                employee.getSalary().getValue()
+                employee.getStartDate().getValue(),
+                employee.getJob().getValue()
         );
     }
 }

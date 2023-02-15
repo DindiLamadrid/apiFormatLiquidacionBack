@@ -24,7 +24,7 @@ public class EmployeeUseCaseTest {
     @Test
     void minimumSizeDocumentTest() {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setDocument("1234");
+        employeeDTO.setDocument("1234L");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -38,7 +38,7 @@ public class EmployeeUseCaseTest {
     @Test
     void maximunSizeDocumentTest() {
         EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setDocument("12345678910101416");
+        employeeDTO.setDocument("12345678910101416L");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);

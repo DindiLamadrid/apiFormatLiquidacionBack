@@ -2,8 +2,10 @@ package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.SalaryDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -19,10 +21,13 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     private final IEmployeeRepositoryAdapter iEmployeeRepositoryAdapter;
 
 
-
     @Override
-    public Employee saveEmployee(Employee employee) {
+    public Employee saveEmployee(Employee employee, List<Salary> salaries) {
         EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employee);
+        if (!salaries.isEmpty()) {
+            List<SalaryDBO> salariesDBO = salaries.stream().map(SalaryDBO::fromDomain).collect(Collectors.toList());
+            employeeDBO.setSalaryList(salariesDBO);
+        }
         EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(employeeDBO);
         return EmployeeDBO.toDomain(employeeSaved);
     }
@@ -30,8 +35,8 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     @Override
     public Employee updateEmployee(Employee employee) {
         EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
-        Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getId());
-        if (elementFound.isEmpty()){
+        Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getIdEmployee());
+        if (elementFound.isEmpty()) {
             throw new NullPointerException("Employee not exist with id: " + employee.getDocument().getClass());
 
         } else {
@@ -41,7 +46,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     }
 
     @Override
-    public Employee findEmployeeById(String id) {
+    public Employee findEmployeeById(Long id) {
         Optional<EmployeeDBO> dbo = iEmployeeRepositoryAdapter.findById(id);
         if (dbo.isEmpty()) {
             throw new NullPointerException("Not exist employee with id: " + id);
@@ -56,7 +61,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     }
 
     @Override
-    public Boolean deleteEmployee(String id) {
+    public Boolean deleteEmployee(Long id) {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<EmployeeDBO> dbo = iEmployeeRepositoryAdapter.findById(id);
         dbo.ifPresent(value -> {
