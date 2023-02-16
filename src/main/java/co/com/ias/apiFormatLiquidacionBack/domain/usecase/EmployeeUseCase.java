@@ -20,13 +20,10 @@ public class EmployeeUseCase {
     }
 
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
-        List<Salary> salaries = new ArrayList<>();
-        if (employeeDTO.getSalary() > 0) {
-            Salary salary = new Salary(employeeDTO.getSalary());
-            this.iSalaryRepository.saveSalary(salary);
-        }
-        Employee employee = employeeDTO.toDomain(employeeDTO);
-        return EmployeeDTO.fromDomain(this.iEmployeeRepository.saveEmployee(employee, salaries));
+        Salary salary = employeeDTO.getSalary();
+        salary = this.iSalaryRepository.saveSalary(salary);
+        Employee employee = employeeDTO.toDomain(employeeDTO, salary);
+        return EmployeeDTO.fromDomain(this.iEmployeeRepository.saveEmployee(employee));
     }
 
     public EmployeeDTO findEmployeeById(Long id) {
@@ -49,7 +46,7 @@ public class EmployeeUseCase {
     }
 
     public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) {
-        Employee employee = employeeDTO.toDomain(employeeDTO);
+        Employee employee = employeeDTO.toDomain(employeeDTO, employeeDTO.getSalary());
         return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
     }
 }

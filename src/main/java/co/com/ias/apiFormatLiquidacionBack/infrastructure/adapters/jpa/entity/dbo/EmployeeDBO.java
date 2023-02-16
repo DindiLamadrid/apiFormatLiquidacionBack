@@ -1,12 +1,10 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "Employee")
@@ -23,14 +21,9 @@ public class EmployeeDBO {
     private String name;
     private LocalDate startDate;
     private String job;
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "salaryList")
-    @JsonIgnoreProperties("salaryList")
-    private List<SalaryDBO> salaryList;
+    @ManyToOne
+    @JoinColumn(name = "salary")
+    private SalaryDBO salary;
 
 
     public Long getIdEmployee() {
@@ -86,7 +79,7 @@ public class EmployeeDBO {
                 new Document(employeeDBO.getDocument()),
                 new Job(employeeDBO.getJob()),
                 new Name(employeeDBO.getName()),
-                new StartDate(employeeDBO.getStartDate()));
+                new StartDate(employeeDBO.getStartDate()), SalaryDBO.toDomain(employeeDBO.getSalary()));
     }
 
     public static EmployeeDBO fromDomain(Employee employee) {
@@ -94,8 +87,8 @@ public class EmployeeDBO {
                 employee.getDocument().getValue(),
                 employee.getName().getValue(),
                 employee.getStartDate().getValue(),
-                employee.getJob().getValue()
-        );
+                employee.getJob().getValue(),
+                SalaryDBO.fromDomain(employee.getSalary()));
     }
 }
 

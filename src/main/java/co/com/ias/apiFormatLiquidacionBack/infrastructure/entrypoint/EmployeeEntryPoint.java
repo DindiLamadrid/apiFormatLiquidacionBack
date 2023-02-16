@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/employee")
 @AllArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class EmployeeEntryPoint {
 
     private final EmployeeUseCase employeeUseCase;
@@ -20,11 +20,7 @@ public class EmployeeEntryPoint {
     @GetMapping("/getAllEmployees")
     public ResponseEntity<?> get() {
         List<EmployeeDTO> employee = employeeUseCase.findAllEmployees();
-        if (employee.isEmpty()) {
-            return new ResponseEntity(employee, HttpStatus.NOT_FOUND);
-        } else {
-            return new ResponseEntity(employee, HttpStatus.OK);
-        }
+        return new ResponseEntity(employee, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

@@ -2,10 +2,8 @@ package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
-import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.SalaryDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,12 +20,8 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
 
 
     @Override
-    public Employee saveEmployee(Employee employee, List<Salary> salaries) {
+    public Employee saveEmployee(Employee employee) {
         EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employee);
-        if (!salaries.isEmpty()) {
-            List<SalaryDBO> salariesDBO = salaries.stream().map(SalaryDBO::fromDomain).collect(Collectors.toList());
-            employeeDBO.setSalaryList(salariesDBO);
-        }
         EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(employeeDBO);
         return EmployeeDBO.toDomain(employeeSaved);
     }
