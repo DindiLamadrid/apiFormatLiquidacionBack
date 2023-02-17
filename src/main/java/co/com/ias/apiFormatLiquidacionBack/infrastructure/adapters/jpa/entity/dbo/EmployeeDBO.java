@@ -30,40 +30,16 @@ public class EmployeeDBO {
         return idEmployee;
     }
 
-    public void setIdEmployee(Long id_employee) {
-        this.idEmployee = id_employee;
-    }
-
     public String getDocument() {
         return document;
-    }
-
-    public void setDocument(String document) {
-        this.document = document;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     public String getJob() {
         return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
     }
 
     public EmployeeDBO(Long idEmployee, String document, String name, LocalDate startDate, String job) {
@@ -91,4 +67,5 @@ public class EmployeeDBO {
                 SalaryDBO.fromDomain(employee.getSalary()));
     }
 }
+
 

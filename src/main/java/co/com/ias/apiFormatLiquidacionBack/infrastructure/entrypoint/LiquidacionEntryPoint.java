@@ -1,0 +1,45 @@
+package co.com.ias.apiFormatLiquidacionBack.infrastructure.entrypoint;
+
+import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto.LiquidacionDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.usecase.LiquidacionUseCase;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("/liquidacion")
+@CrossOrigin(origins = "http://localhost:4200/")
+public class LiquidacionEntryPoint {
+
+    private final LiquidacionUseCase liquidacionUseCase;
+
+    @GetMapping("/getAllLiquidacion")
+    public ResponseEntity<?> get() {
+        List<LiquidacionDTO> liquidacion = liquidacionUseCase.findAllLiquidaciones();
+        return new ResponseEntity(liquidacion, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity(liquidacionUseCase.findLiquidacionById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/createLiquidacion")
+    public ResponseEntity<?> create(@RequestBody LiquidacionDTO liquidacionDTO) {
+        return new ResponseEntity(liquidacionUseCase.saveLiquidacion(liquidacionDTO), HttpStatus.CREATED);
+    }
+
+//    @PutMapping("/updateLiquidacion")
+//    public ResponseEntity<?> update(@RequestBody LiquidacionDTO liquidacionDTO) {
+//        return new ResponseEntity(liquidacionUseCase.updateLiquidacion(liquidacionDTO), HttpStatus.OK);
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return new ResponseEntity(liquidacionUseCase.deleteLiquidacion(id), HttpStatus.OK);
+    }
+}

@@ -34,7 +34,6 @@ public class EmployeeUseCase {
         return null;
     }
 
-
     public ArrayList<EmployeeDTO> findAllEmployees() {
         List<Employee> employee = this.iEmployeeRepository.findAllEmployee();
         return (ArrayList<EmployeeDTO>) employee.stream().map(EmployeeDTO::fromDomain).collect(Collectors.toList());

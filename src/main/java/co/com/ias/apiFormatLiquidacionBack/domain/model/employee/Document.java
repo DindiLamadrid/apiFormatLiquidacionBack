@@ -1,7 +1,5 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.employee;
 
-import org.springframework.util.Assert;
-
 import static org.springframework.util.Assert.notNull;
 
 public class Document {
