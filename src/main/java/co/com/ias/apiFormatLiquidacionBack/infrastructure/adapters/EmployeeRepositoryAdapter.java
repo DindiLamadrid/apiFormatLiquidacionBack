@@ -31,8 +31,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
         EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
         Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getIdEmployee());
         if (elementFound.isEmpty()) {
-            throw new NullPointerException("Employee not exist with id: " + employee.getDocument().getClass());
-
+            throw new NullPointerException("Employee not exist with id: " + employee.getIdEmployee().getClass());
         } else {
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
             return EmployeeDBO.toDomain(employeeSaved);

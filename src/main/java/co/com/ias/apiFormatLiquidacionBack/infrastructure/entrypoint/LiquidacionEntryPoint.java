@@ -23,7 +23,7 @@ public class LiquidacionEntryPoint {
         return new ResponseEntity(liquidacion, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getLiquidacionById/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity(liquidacionUseCase.findLiquidacionById(id), HttpStatus.OK);
     }
@@ -33,12 +33,8 @@ public class LiquidacionEntryPoint {
         return new ResponseEntity(liquidacionUseCase.saveLiquidacion(liquidacionDTO), HttpStatus.CREATED);
     }
 
-//    @PutMapping("/updateLiquidacion")
-//    public ResponseEntity<?> update(@RequestBody LiquidacionDTO liquidacionDTO) {
-//        return new ResponseEntity(liquidacionUseCase.updateLiquidacion(liquidacionDTO), HttpStatus.OK);
-//    }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteLiquidacion/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return new ResponseEntity(liquidacionUseCase.deleteLiquidacion(id), HttpStatus.OK);
     }

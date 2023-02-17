@@ -38,7 +38,7 @@ public class LiquidacionDBO {
 
     public LiquidacionDBO(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
                           int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias, Double interesesCesantias,
-                          Double vacaciones, Double auxTransporte, Double bono, Double totalLiquidacion) {
+                          Double vacaciones, Double auxTransporte, Double bono, Double totalLiquidacion, EmployeeDBO employeeDBO) {
         this.salario = salario;
         this.auxilio = auxilio;
         this.fechaInicio = fechaInicio;
@@ -53,6 +53,7 @@ public class LiquidacionDBO {
         this.auxTransporte = auxTransporte;
         this.bono = bono;
         this.totalLiquidacion = totalLiquidacion;
+        this.employeeDBO = employeeDBO;
     }
 
 
@@ -61,13 +62,14 @@ public class LiquidacionDBO {
                 liquidacionDBO.getAuxilio(), liquidacionDBO.getFechaInicio(), liquidacionDBO.getFechaFin(),
                 liquidacionDBO.getMotivo(), liquidacionDBO.getDiasLaborados(), liquidacionDBO.getSalarioBase(), liquidacionDBO.getPrimaServicios(),
                 liquidacionDBO.getCesantias(), liquidacionDBO.getInteresesCesantias(), liquidacionDBO.getVacaciones(), liquidacionDBO.getAuxTransporte(),
-                liquidacionDBO.getBono(), liquidacionDBO.getTotalLiquidacion());
+                liquidacionDBO.getBono(), liquidacionDBO.getTotalLiquidacion(), EmployeeDBO.toDomain(liquidacionDBO.getEmployeeDBO()));
     }
 
     public static LiquidacionDBO fromDomain(Liquidacion liquidacion) {
         return new LiquidacionDBO(liquidacion.getSalario(), liquidacion.getAuxilio(), liquidacion.getFechaInicio(), liquidacion.getFechaFin(),
-                liquidacion.getMotivo(), liquidacion.getDiasLaborados(), liquidacion.getSalarioBase(), liquidacion.getPrimaServicios(), liquidacion.getCesantias(),
-                liquidacion.getInteresesCesantias(), liquidacion.getVacaciones(), liquidacion.getAuxTransporte(), liquidacion.getBono(), liquidacion.getTotalLiquidacion());
+                liquidacion.getMotivo(), liquidacion.getDiasLaborados(), liquidacion.getSalarioBase(), liquidacion.getPrimaServicios(),
+                liquidacion.getCesantias(), liquidacion.getInteresesCesantias(), liquidacion.getVacaciones(), liquidacion.getAuxTransporte(),
+                liquidacion.getBono(), liquidacion.getTotalLiquidacion(), EmployeeDBO.fromDomain(liquidacion.getEmployee()));
 
     }
 }

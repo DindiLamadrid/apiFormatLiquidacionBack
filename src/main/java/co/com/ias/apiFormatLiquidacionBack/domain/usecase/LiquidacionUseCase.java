@@ -23,16 +23,42 @@ public class LiquidacionUseCase {
 
     public LiquidacionDTO saveLiquidacion(LiquidacionDTO liquidacionDTO) {
         Employee employeeById = this.iEmployeeRepository.findEmployeeById(liquidacionDTO.getIdEmployee());
+        Employee employee = this.iEmployeeRepository.findEmployeeById(liquidacionDTO.getIdEmployee());
+
+        //variables
+        Double primaServicio = 0d;
+        Double cesantias = 0d;
+        Double interesesCesantias = 0d;
+        Double vacaciones = 0d;
+        Double auxTransporte = 0d;
+        Double bono = 0d;
+        Double totalLiquidacion = 0d;
 
         Double salaryBase = employeeById.getSalary().getValue();
         LocalDate startDate = employeeById.getStartDate().getValue();
         Period period = Period.between(startDate, liquidacionDTO.getFechaFin());
         int diasLaborados = period.getDays();
+        int primeraño = diasLaborados % 360;
 
-        Double primaServicio = (salaryBase * (diasLaborados / 6)) / 360;
+        if ("VOLUNTARIO".equals(liquidacionDTO.getMotivo()) || "JUSTIFICADO".equals(liquidacionDTO.getMotivo())) {
+            primaServicio = (salaryBase * (diasLaborados / 6)) / 360;
+            cesantias = (salaryBase * (diasLaborados)) / 360;
+            interesesCesantias = cesantias * (diasLaborados * 0.12) / 360;
+            vacaciones = salaryBase * (diasLaborados / 720);
+            auxTransporte = (double) (102854 / 30);
+        } else {
+            primaServicio = (salaryBase * (diasLaborados / 6)) / 360;
+            cesantias = (salaryBase * (diasLaborados)) / 360;
+            interesesCesantias = cesantias * (diasLaborados * 0.12) / 360;
+            vacaciones = salaryBase * (diasLaborados / 720);
+            auxTransporte = (double) (102854 / 30);
+            bono = (salaryBase) + (salaryBase * 20 * primeraño);
+        }
 
-        Liquidacion liquidacion = LiquidacionDTO.toDomain(salaryBase, 0d, startDate, liquidacionDTO.getFechaFin(), liquidacionDTO.getMotivo(),
-                diasLaborados, salaryBase, primaServicio, 0d, 0d, 0d, 0d, 0d, 0d);
+
+        Liquidacion liquidacion = LiquidacionDTO.toDomain(salaryBase, auxTransporte, startDate, liquidacionDTO.getFechaFin(),
+                liquidacionDTO.getMotivo(), diasLaborados, salaryBase, primaServicio, cesantias, interesesCesantias,
+                vacaciones, auxTransporte, bono, totalLiquidacion, employee);
         return LiquidacionDTO.fromDomain(this.iLiquidacionRepository.saveLiquidacion(liquidacion));
     }
 

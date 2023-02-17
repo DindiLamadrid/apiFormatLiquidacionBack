@@ -23,7 +23,7 @@ public class EmployeeEntryPoint {
         return new ResponseEntity(employee, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getEmployeeById/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity(employeeUseCase.findEmployeeById(id), HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class EmployeeEntryPoint {
         return new ResponseEntity(employeeUseCase.updateEmployee(employeeDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteEmployee/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return new ResponseEntity(employeeUseCase.deleteEmployee(id), HttpStatus.OK);
     }

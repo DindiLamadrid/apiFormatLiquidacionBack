@@ -23,7 +23,7 @@ public class SalaryEntryPoint {
         return new ResponseEntity(salary, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getSalaryById/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity(salaryUseCase.findSalaryById(id), HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class SalaryEntryPoint {
         return new ResponseEntity(salaryUseCase.updateSalary(salaryDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteSalary/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return new ResponseEntity(salaryUseCase.deleteSalary(id), HttpStatus.OK);
     }

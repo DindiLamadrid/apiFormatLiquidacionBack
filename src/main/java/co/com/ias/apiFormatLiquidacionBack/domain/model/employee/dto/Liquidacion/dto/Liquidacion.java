@@ -1,5 +1,8 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto;
 
+import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+
 import java.time.LocalDate;
 
 public class Liquidacion {
@@ -14,7 +17,7 @@ public class Liquidacion {
     private Double cesantias;
     private Double interesesCesantias;
     private Double vacaciones;
-    private Long idEmployee;
+    private Employee employee;
 
     public Double getSalario() {
         return salario;
@@ -124,12 +127,12 @@ public class Liquidacion {
         return totalLiquidacion;
     }
 
-    public Long getIdEmployee() {
-        return idEmployee;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setIdEmployee(Long idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setIdEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public void setTotalLiquidacion(Double totalLiquidacion) {
@@ -141,7 +144,10 @@ public class Liquidacion {
     private Double totalLiquidacion;
 
 
-    public Liquidacion(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo, int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias, Double interesesCesantias, Double vacaciones, Double auxTransporte, Double bono, Double totalLiquidacion) {
+    public Liquidacion(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
+                       int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias,
+                       Double interesesCesantias, Double vacaciones, Double auxTransporte,
+                       Double bono, Double totalLiquidacion, Employee employee) {
         this.salario = salario;
         this.auxilio = auxilio;
         this.fechaInicio = fechaInicio;
@@ -156,6 +162,7 @@ public class Liquidacion {
         this.auxTransporte = auxTransporte;
         this.bono = bono;
         this.totalLiquidacion = totalLiquidacion;
+        this.employee = employee;
     }
 
 
