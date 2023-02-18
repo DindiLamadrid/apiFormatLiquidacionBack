@@ -2,12 +2,15 @@ package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.SalaryDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -30,9 +33,15 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     public Employee updateEmployee(Employee employee) {
         EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
         Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getIdEmployee());
+        //validar salario aqui
+
         if (elementFound.isEmpty()) {
             throw new NullPointerException("Employee not exist with id: " + employee.getIdEmployee().getClass());
         } else {
+            if(Objects.equals(dbo.getSalary().getSalaryValue(), elementFound.get().getSalary().getSalaryValue())){
+                SalaryDBO salary = SalaryDBO.fromDomain(SalaryDBO.toDomain(elementFound.get().getSalary()));
+                dbo.setSalary(salary);
+            }
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
             return EmployeeDBO.toDomain(employeeSaved);
         }

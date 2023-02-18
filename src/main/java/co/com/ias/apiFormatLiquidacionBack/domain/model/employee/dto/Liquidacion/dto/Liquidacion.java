@@ -1,10 +1,11 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@NoArgsConstructor
 public class Liquidacion {
     private Double salario;
     private Double auxilio;
