@@ -20,7 +20,6 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
 
     private final IEmployeeRepositoryAdapter iEmployeeRepositoryAdapter;
     private final ISalaryRepositoryAdapter iSalaryRepositoryAdapter;
-
     private final IHistorySalaryRepository iHistorySalaryRepository;
 
 
@@ -28,7 +27,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
     public Employee saveEmployee(Employee employee) {
         EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employee);
         EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(employeeDBO);
-        iHistorySalaryRepository.saveHistorySalary(employeeSaved.getSalary().getIdSalary(), employeeSaved.getIdEmployee());
+        iHistorySalaryRepository.saveHistorySalary(employeeSaved.getSalary(), employeeSaved);
         return EmployeeDBO.toDomain(employeeSaved);
     }
 
@@ -40,8 +39,8 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
             throw new NullPointerException("Employee not exist with id: " + employee.getIdEmployee().getClass());
         } else {
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
-            iHistorySalaryRepository.saveHistorySalary(employeeSaved.getSalary().getIdSalary()
-                    , employeeSaved.getIdEmployee());
+            iHistorySalaryRepository.saveHistorySalary(employeeSaved.getSalary()
+                    , employeeSaved);
             return EmployeeDBO.toDomain(employeeSaved);
         }
     }

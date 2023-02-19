@@ -30,8 +30,8 @@ public class UseCaseBeanConfig {
     }
 
     @Bean
-    public HistorySalaryUseCase historySalaryUseCase(IHistorySalaryRepository iHistorySalaryRepository) {
-        return new HistorySalaryUseCase(iHistorySalaryRepository);
+    public HistorySalaryUseCase historySalaryUseCase(IHistorySalaryRepository iHistorySalaryRepository, IEmployeeRepository iEmployeeRepository) {
+        return new HistorySalaryUseCase(iHistorySalaryRepository, iEmployeeRepository);
     }
 
 }

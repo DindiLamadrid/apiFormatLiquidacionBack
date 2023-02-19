@@ -16,24 +16,42 @@ public class HistorySalaryDBO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idEmployee;
-    private Long idSalary;
 
-    public HistorySalaryDBO(Long idSalary, Long idEmployee) {
-        this.idSalary = idSalary;
-        this.idEmployee = idEmployee;
+    @ManyToOne
+    @JoinColumn(name = "employee")
+    private EmployeeDBO employeeDBO;
+
+    @ManyToOne
+    @JoinColumn(name = "salary")
+    private SalaryDBO salaryDBO;
+
+    public Long getId() {
+        return id;
+    }
+
+    public EmployeeDBO getEmployeeDBO() {
+        return employeeDBO;
+    }
+
+    public SalaryDBO getSalaryDBO() {
+        return salaryDBO;
+    }
+
+    public HistorySalaryDBO(SalaryDBO salaryDBO, EmployeeDBO employeeDBO) {
+        this.employeeDBO = employeeDBO;
+        this.salaryDBO = salaryDBO;
     }
 
     public static HistorySalary toDomain(HistorySalaryDBO historySalaryDBO) {
-        return new HistorySalary(
-                historySalaryDBO.getIdEmployee(),
-                historySalaryDBO.getIdSalary()
+        return new HistorySalary(historySalaryDBO.getId(),
+                SalaryDBO.toDomain(historySalaryDBO.getSalaryDBO()),
+                EmployeeDBO.toDomain(historySalaryDBO.getEmployeeDBO())
         );
     }
 
     public static HistorySalaryDBO fromDomain(HistorySalary historySalary) {
         return new HistorySalaryDBO(
-                historySalary.getIdSalary(), historySalary.getIdEmployee()
+                SalaryDBO.fromDomain(historySalary.getSalary()), EmployeeDBO.fromDomain(historySalary.getEmployee())
         );
     }
 }
