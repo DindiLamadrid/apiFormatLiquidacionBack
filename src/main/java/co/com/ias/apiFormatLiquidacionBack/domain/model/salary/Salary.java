@@ -21,9 +21,18 @@ public class Salary {
 
     public Salary(Double value) {
         notNull(value, "The salary cannot be empty");
+        if (value <= 0) {
+            throw new IllegalArgumentException("The salary cannot be empty");
+        }
+        if (value < 100000) {
+            throw new IllegalArgumentException("The salary cannot be less than current SVML");
+        }
+        if (value > 7000000) {
+            throw new IllegalArgumentException("The salary cannot be more than 7.000.000 COP");
+        }
         this.value = value;
     }
-    
+
     public Salary(Long id, double value) {
         this.id = id;
         this.value = value;

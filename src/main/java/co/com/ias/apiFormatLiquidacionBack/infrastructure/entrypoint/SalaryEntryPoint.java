@@ -23,7 +23,7 @@ public class SalaryEntryPoint {
         return new ResponseEntity(salary, HttpStatus.OK);
     }
 
-    @GetMapping("/getSalaryById/{id}")
+    @GetMapping("/getAllSalaries/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity(salaryUseCase.findSalaryById(id), HttpStatus.OK);
     }
