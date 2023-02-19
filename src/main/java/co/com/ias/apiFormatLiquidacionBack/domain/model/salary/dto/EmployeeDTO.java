@@ -20,8 +20,16 @@ public class EmployeeDTO {
     @DateTimeFormat(pattern = "yyyy/dd/MM")
     private LocalDate startDate;
     private String job;
-
     private Salary salary;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Salary getSalary() {
         return salary;
@@ -43,20 +51,21 @@ public class EmployeeDTO {
         this.job = job;
     }
 
-    public EmployeeDTO(Long id, String document, String name, LocalDate startDate, String job, Salary salary) {
+    public EmployeeDTO(Long id, String document, String name, LocalDate startDate, String job, Salary salary, String status) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.startDate = startDate;
         this.job = job;
         this.salary = salary;
+        this.status = status;
     }
 
     public static EmployeeDTO fromDomain(Employee employee) {
         return new EmployeeDTO(employee.getIdEmployee(), employee.getDocument().getValue(),
                 employee.getName().getValue(),
                 employee.getStartDate().getValue(),
-                employee.getJob().getValue(), employee.getSalary());
+                employee.getJob().getValue(), employee.getSalary(), employee.getStatus());
     }
 
     public String getName() {
@@ -89,7 +98,7 @@ public class EmployeeDTO {
                 new Document(employeeDTO.getDocument()),
                 new Job(employeeDTO.getJob()),
                 new Name(employeeDTO.getName()),
-                new StartDate(employeeDTO.getStartDate()), salaryDTO
+                new StartDate(employeeDTO.getStartDate()), salaryDTO, employeeDTO.getStatus()
         );
     }
 

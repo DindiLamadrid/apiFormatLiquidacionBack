@@ -8,12 +8,20 @@ public class Employee {
     private final Document document;
     private final Job job;
     private Salary salary;
+    private String status;
+    private final Name name;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getIdEmployee() {
         return idEmployee;
     }
-
-    private final Name name;
 
     public Salary getSalary() {
         return salary;
@@ -42,20 +50,22 @@ public class Employee {
         return startDate;
     }
 
-    public Employee(Long idEmployee, Document document, Job job, Name name, StartDate startDate, Salary salary) {
+    public Employee(Long idEmployee, Document document, Job job, Name name, StartDate startDate, Salary salary, String status) {
         this.idEmployee = idEmployee;
         this.document = document;
         this.job = job;
         this.name = name;
         this.startDate = startDate;
         this.salary = salary;
+        this.status = status;
     }
 
-    public Employee(Long idEmployee, Document document, Job job, Name name, StartDate startDate) {
+    public Employee(Long idEmployee, Document document, Job job, Name name, StartDate startDate, String status) {
         this.idEmployee = idEmployee;
         this.document = document;
         this.job = job;
         this.name = name;
         this.startDate = startDate;
+        this.status = status;
     }
 }

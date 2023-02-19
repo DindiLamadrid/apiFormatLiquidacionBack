@@ -24,6 +24,7 @@ public class EmployeeDBO {
     @ManyToOne
     @JoinColumn(name = "salary")
     private SalaryDBO salary;
+    private String status;
 
 
     public Long getIdEmployee() {
@@ -55,7 +56,9 @@ public class EmployeeDBO {
                 new Document(employeeDBO.getDocument()),
                 new Job(employeeDBO.getJob()),
                 new Name(employeeDBO.getName()),
-                new StartDate(employeeDBO.getStartDate()), SalaryDBO.toDomain(employeeDBO.getSalary()));
+                new StartDate(employeeDBO.getStartDate()),
+                SalaryDBO.toDomain(employeeDBO.getSalary()),
+                employeeDBO.getStatus());
     }
 
     public static EmployeeDBO fromDomain(Employee employee) {
@@ -64,7 +67,8 @@ public class EmployeeDBO {
                 employee.getName().getValue(),
                 employee.getStartDate().getValue(),
                 employee.getJob().getValue(),
-                SalaryDBO.fromDomain(employee.getSalary()));
+                SalaryDBO.fromDomain(employee.getSalary()),
+                employee.getStatus());
     }
 }
 

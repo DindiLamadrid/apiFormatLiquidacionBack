@@ -20,6 +20,7 @@ public class EmployeeUseCase {
     }
 
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
+        employeeDTO.setStatus("Activo");
         Salary salary = employeeDTO.getSalary();
         salary = this.iSalaryRepository.saveSalary(salary);
         Employee employee = employeeDTO.toDomain(employeeDTO, salary);
