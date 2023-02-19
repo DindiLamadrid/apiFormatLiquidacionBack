@@ -23,8 +23,7 @@ public class Salary {
         notNull(value, "The salary cannot be empty");
         this.value = value;
     }
-
-
+    
     public Salary(Long id, double value) {
         this.id = id;
         this.value = value;

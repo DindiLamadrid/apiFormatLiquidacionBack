@@ -59,7 +59,7 @@ public class LiquidacionUseCase {
         Liquidacion liquidacion = LiquidacionDTO.toDomain(salaryBase, auxTransporte, startDate, liquidacionDTO.getFechaFin(),
                 liquidacionDTO.getMotivo(), diasLaborados, salaryBase, primaServicio, cesantias, interesesCesantias,
                 vacaciones, auxTransporte, bono, totalLiquidacion, employee);
-        return LiquidacionDTO.fromDomain(this.iLiquidacionRepository.saveLiquidacion(liquidacion));
+        return LiquidacionDTO.fromDomain(this.iLiquidacionRepository.saveLiquidacion(liquidacion, employee));
     }
 
     public LiquidacionDTO findLiquidacionById(Long id) {

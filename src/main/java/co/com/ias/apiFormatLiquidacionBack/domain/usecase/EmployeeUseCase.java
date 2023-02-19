@@ -8,6 +8,7 @@ import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class EmployeeUseCase {
@@ -46,7 +47,18 @@ public class EmployeeUseCase {
     }
 
     public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) {
+        Employee employeeDb = this.iEmployeeRepository.findEmployeeById(employeeDTO.getId());
         Employee employee = employeeDTO.toDomain(employeeDTO, employeeDTO.getSalary());
+
+        if (Objects.equals(employee.getSalary().getValue(), employeeDb.getSalary().getValue())) {
+            Salary salary = employeeDb.getSalary();
+            employee.setSalary(salary);
+        } else {
+//            Salary newSalary = employee.getSalary();
+            Salary newSalary = new Salary(employee.getSalary().getValue());
+            newSalary = this.iSalaryRepository.saveSalary(newSalary);
+            employee.setSalary(newSalary);
+        }
         return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
     }
 }

@@ -1,9 +1,12 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 
+import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ILiquidacionRepository;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.ILiquidacionRepositoryAdapter;
 
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.LiquidacionDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -18,11 +21,14 @@ import java.util.stream.Collectors;
 public class LiquidacionRepositoryAdapter implements ILiquidacionRepository {
 
     private final ILiquidacionRepositoryAdapter iLiquidacionRepositoryAdapter;
+    private final IEmployeeRepositoryAdapter iEmployeeRepositoryAdapter;
 
     @Override
-    public Liquidacion saveLiquidacion(Liquidacion liquidacion) {
+    public Liquidacion saveLiquidacion(Liquidacion liquidacion, Employee employee) {
         LiquidacionDBO liquidacionDBO = LiquidacionDBO.fromDomain(liquidacion);
         LiquidacionDBO liquidacionSaved = iLiquidacionRepositoryAdapter.save(liquidacionDBO);
+        employee.setStatus(liquidacion.getMotivo());
+        iEmployeeRepositoryAdapter.save(EmployeeDBO.fromDomain(employee));
         return LiquidacionDBO.toDomain(liquidacionSaved);
     }
 
