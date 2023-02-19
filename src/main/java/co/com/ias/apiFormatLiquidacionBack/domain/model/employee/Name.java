@@ -1,17 +1,22 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.employee;
 
+import io.micrometer.common.util.StringUtils;
 import org.springframework.util.Assert;
 
 import java.util.regex.Pattern;
 
+import static org.springframework.util.Assert.notEmpty;
 import static org.springframework.util.Assert.notNull;
+
 
 public class Name {
     private final String value;
 
     public Name(String value) {
-        notNull(value, "The name cannot be empty");
-        Assert.isTrue(value.length() <= 50, "The name must not exceed 50 characters");
+        Assert.isTrue(StringUtils.isNotBlank(value), "The name cannot be empty");
+        if (value.length() > 50) {
+            throw new IllegalArgumentException("The name must contain less than 50 digits");
+        }
         Assert.isTrue(Pattern.matches("^[A-z\\s]+(?<!\\s)$", value), "The name can only contain letters");
         this.value = value;
     }

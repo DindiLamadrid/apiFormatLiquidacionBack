@@ -11,13 +11,13 @@ public class StartDate {
         LocalDate dateMax = LocalDate.of(2015, 6, 6); //
         LocalDate dateMin = LocalDate.of(2015, 1, 1); //
 
-        notNull(value, "The Date cannot be empty");
+        notNull(value, "The start date cannot be empty");
 
         if (value.isAfter(dateMax)) {
-            throw new IllegalArgumentException("Date cannot be after 06/06/2015");
+            throw new IllegalArgumentException("The start date cannot be after 06/06/2015");
         }
         if (value.isBefore(dateMin)) {
-            throw new IllegalArgumentException("Date cannot be before 01/01/2015");
+            throw new IllegalArgumentException("The start date cannot be before 01/01/2015");
         }
 
         this.value = value;
