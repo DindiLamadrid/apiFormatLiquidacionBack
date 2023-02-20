@@ -2,9 +2,12 @@ package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.d
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Salary")
@@ -18,9 +21,9 @@ public class SalaryDBO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSalary;
     private Double salaryValue;
-    private LocalDateTime fechaModificacion;
+    private LocalDate fechaModificacion;
 
-    public SalaryDBO(Long idSalary, Double salaryValue, LocalDateTime fechaModificacion) {
+    public SalaryDBO(Long idSalary, Double salaryValue, LocalDate fechaModificacion) {
         this.idSalary = idSalary;
         this.salaryValue = salaryValue;
         this.fechaModificacion = fechaModificacion;
@@ -30,10 +33,11 @@ public class SalaryDBO {
         return new Salary(salaryDBO.getIdSalary(), salaryDBO.getSalaryValue(), salaryDBO.getFechaModificacion()
         );
     }
+
     public static SalaryDBO fromDomain(Salary salary) {
         return new SalaryDBO(
                 salary.getId(),
-                salary.getValue(), salary.getFechaModificacion()
+                salary.getSalary(), salary.getFechaModificacion()
         );
     }
 }

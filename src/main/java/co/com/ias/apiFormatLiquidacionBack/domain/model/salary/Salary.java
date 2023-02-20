@@ -1,17 +1,20 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.salary;
 
-import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 import static org.springframework.util.Assert.notNull;
 
 public class Salary {
 
     private Long id;
-    private final Double value;
+    private final Double salary;
 
-    private LocalDateTime fechaModificacion;
+    @DateTimeFormat()
+    private LocalDate fechaModificacion;
 
-    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+    public void setFechaModificacion(LocalDate fechaModificacion) {
         this.fechaModificacion = fechaModificacion;
     }
 
@@ -23,31 +26,31 @@ public class Salary {
         this.id = id;
     }
 
-    public Double getValue() {
-        return value;
+    public Double getSalary() {
+        return salary;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public LocalDate getFechaModificacion() {
         return fechaModificacion;
     }
 
-    public Salary(Double value) {
-        notNull(value, "The salary cannot be empty");
-        if (value <= 0) {
+    public Salary(Double salary) {
+        notNull(salary, "The salary cannot be empty");
+        if (salary <= 0) {
             throw new IllegalArgumentException("The salary cannot be empty");
         }
-        if (value < 100000) {
+        if (salary < 100000) {
             throw new IllegalArgumentException("The salary cannot be less than current SVML");
         }
-        if (value > 7000000) {
+        if (salary > 7000000) {
             throw new IllegalArgumentException("The salary cannot be more than 7.000.000 COP");
         }
-        this.value = value;
+        this.salary = salary;
     }
 
-    public Salary(Long id, double value, LocalDateTime fechaModificacion) {
+    public Salary(Long id, double salary, LocalDate fechaModificacion) {
         this.id = id;
-        this.value = value;
+        this.salary = salary;
         this.fechaModificacion = fechaModificacion;
     }
 }

@@ -3,6 +3,7 @@ package co.com.ias.apiFormatLiquidacionBack.domain.model.dto;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -11,7 +12,7 @@ public class SalaryDTO {
 
     private Double value;
 
-    private LocalDateTime fechaModificacion;
+    private LocalDate fechaModificacion;
 
     public Long getId() {
         return id;
@@ -21,7 +22,7 @@ public class SalaryDTO {
         this.id = id;
     }
 
-    public LocalDateTime getFechaModificacion() {
+    public LocalDate getFechaModificacion() {
         return fechaModificacion;
     }
 
@@ -33,7 +34,7 @@ public class SalaryDTO {
         this.value = value;
     }
 
-    public SalaryDTO(Long id, Double value, LocalDateTime fechaModificacion) {
+    public SalaryDTO(Long id, Double value, LocalDate fechaModificacion) {
         this.id = id;
         this.value = value;
         this.fechaModificacion = fechaModificacion;
@@ -41,7 +42,7 @@ public class SalaryDTO {
 
     public static SalaryDTO fromDomain(Salary salary) {
         return new SalaryDTO(salary.getId(),
-                salary.getValue(), salary.getFechaModificacion());
+                salary.getSalary(), salary.getFechaModificacion());
     }
 
     public Salary toDomain(SalaryDTO salaryDTO) {

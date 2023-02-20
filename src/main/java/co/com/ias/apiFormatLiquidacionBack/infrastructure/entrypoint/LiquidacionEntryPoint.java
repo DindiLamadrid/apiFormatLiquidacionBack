@@ -1,5 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.entrypoint;
 
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.HistorySalaryDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.LiquidacionDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.usecase.LiquidacionUseCase;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,11 @@ public class LiquidacionEntryPoint {
     @DeleteMapping("/deleteLiquidacion/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return new ResponseEntity(liquidacionUseCase.deleteLiquidacion(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/getLiquidacionByEmployee/{id}")
+    public ResponseEntity<?> getLiquidacionByEmployee(@PathVariable(name = "id") Long id) {
+        List<LiquidacionDTO> historyLiquidacion = liquidacionUseCase.findLiquidacionByEmployeeId(id);
+        return new ResponseEntity<>(historyLiquidacion, HttpStatus.OK);
     }
 }

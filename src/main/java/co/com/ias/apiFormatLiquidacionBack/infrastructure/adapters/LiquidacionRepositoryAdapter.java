@@ -7,6 +7,7 @@ import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployee
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.ILiquidacionRepositoryAdapter;
 
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.HistorySalaryDBO;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.LiquidacionDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -69,5 +70,11 @@ public class LiquidacionRepositoryAdapter implements ILiquidacionRepository {
         } else {
             return LiquidacionDBO.toDomain(dbo.get());
         }
+    }
+
+    @Override
+    public List<Liquidacion> findHistoryByEmployee(EmployeeDBO employeeDBO) {
+        return iLiquidacionRepositoryAdapter.findByEmployeeDBO(employeeDBO).stream().map(LiquidacionDBO::toDomain).
+                collect(Collectors.toList());
     }
 }

@@ -1,15 +1,11 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.EmployeeDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.HistorySalaryDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IHistorySalaryRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.historysalary.HistorySalary;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,10 +1,11 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.LiquidacionDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ILiquidacionRepository;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.LiquidacionDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -34,7 +35,7 @@ public class LiquidacionUseCase {
         Double bono = 0d;
         Double totalLiquidacion = 0d;
 
-        Double salaryBase = employeeById.getSalary().getValue();
+        Double salaryBase = employeeById.getSalary().getSalary();
         LocalDate startDate = employeeById.getStartDate().getValue();
         Period period = Period.between(startDate, liquidacionDTO.getFechaFin());
         int diasLaborados = period.getDays();
@@ -81,4 +82,11 @@ public class LiquidacionUseCase {
         return iLiquidacionRepository.deleteLiquidacion(id);
     }
 
+
+    public List<LiquidacionDTO> findLiquidacionByEmployeeId(Long id) {
+        Employee employeeById = this.iEmployeeRepository.findEmployeeById(id);
+        EmployeeDBO employeeDBO = EmployeeDBO.fromDomain(employeeById);
+        List<Liquidacion> historyByEmployee = this.iLiquidacionRepository.findHistoryByEmployee(employeeDBO);
+        return historyByEmployee.stream().map(LiquidacionDTO::fromDomain).collect(Collectors.toList());
+    }
 }
