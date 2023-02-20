@@ -57,6 +57,7 @@ public class EmployeeUseCase {
         if (Objects.equals(employee.getSalary().getSalary(), employeeDb.getSalary().getSalary())) {
             Salary salary = employeeDb.getSalary();
             employee.setSalary(salary);
+            return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
         } else if (employee.getSalary().getSalary() == 0) {
             throw new IllegalArgumentException("The new salary cannot be empty");
         } else if (employee.getSalary().getSalary() < employeeDb.getSalary().getSalary()) {
@@ -66,7 +67,26 @@ public class EmployeeUseCase {
             newSalary.setFechaModificacion(LocalDate.now());
             newSalary = this.iSalaryRepository.saveSalary(newSalary);
             employee.setSalary(newSalary);
+            return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployeeSalary(employee));
         }
-        return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
+    }
+
+    public EmployeeDTO updateEmployeeAndSalary(EmployeeDTO employeeDTO) {
+        Employee employeeDb = this.iEmployeeRepository.findEmployeeById(employeeDTO.getId());
+        Employee employee = employeeDTO.toDomain(employeeDTO, employeeDTO.getSalary());
+
+        if (Objects.equals(employee.getSalary().getSalary(), employeeDb.getSalary().getSalary())) {
+            return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
+        } else if (employee.getSalary().getSalary() == 0) {
+            throw new IllegalArgumentException("The new salary cannot be empty");
+        } else if (employee.getSalary().getSalary() < employeeDb.getSalary().getSalary()) {
+            throw new IllegalArgumentException("The new salary cannot be less than the actual salary");
+        } else {
+            Salary newSalary = new Salary(employee.getSalary().getSalary());
+            newSalary.setFechaModificacion(LocalDate.now());
+            newSalary = this.iSalaryRepository.saveSalary(newSalary);
+            employee.setSalary(newSalary);
+            return EmployeeDTO.fromDomain(iEmployeeRepository.updateEmployee(employee));
+        }
     }
 }

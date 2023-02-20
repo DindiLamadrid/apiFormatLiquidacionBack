@@ -10,6 +10,8 @@ public interface IEmployeeRepository {
 
     Employee updateEmployee(Employee employee);
 
+    Employee updateEmployeeSalary(Employee employee);
+
     List<Employee> findAllEmployee();
 
     Boolean deleteEmployee(Long employee);

@@ -38,6 +38,12 @@ public class EmployeeEntryPoint {
         return new ResponseEntity(employeeUseCase.updateEmployee(employeeDTO), HttpStatus.OK);
     }
 
+    @PutMapping("/updateEmployeeAndSalary")
+    public ResponseEntity<?> updateEmployeeAndSalary(@RequestBody EmployeeDTO employeeDTO) {
+        return new ResponseEntity(employeeUseCase.updateEmployeeAndSalary(employeeDTO), HttpStatus.OK);
+    }
+
+
     @DeleteMapping("/deleteEmployee/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return new ResponseEntity(employeeUseCase.deleteEmployee(id), HttpStatus.OK);

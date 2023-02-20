@@ -41,6 +41,18 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
             throw new NullPointerException("Employee not exist with id: " + employee.getIdEmployee().getClass());
         } else {
             EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
+            return EmployeeDBO.toDomain(employeeSaved);
+        }
+    }
+
+    @Override
+    public Employee updateEmployeeSalary(Employee employee) {
+        EmployeeDBO dbo = EmployeeDBO.fromDomain(employee);
+        Optional<EmployeeDBO> elementFound = iEmployeeRepositoryAdapter.findById(dbo.getIdEmployee());
+        if (elementFound.isEmpty()) {
+            throw new NullPointerException("Employee not exist with id: " + employee.getIdEmployee().getClass());
+        } else {
+            EmployeeDBO employeeSaved = iEmployeeRepositoryAdapter.save(dbo);
             iHistorySalaryRepository.saveHistorySalary(employeeSaved.getSalary()
                     , employeeSaved);
             return EmployeeDBO.toDomain(employeeSaved);
