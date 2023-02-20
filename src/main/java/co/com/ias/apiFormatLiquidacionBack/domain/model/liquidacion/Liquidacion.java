@@ -7,24 +7,24 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 public class Liquidacion {
-    private Double salario;
-    private Double auxilio;
+    private String salario;
+    private String auxilio;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String motivo;
     private int diasLaborados;
-    private Double salarioBase;
-    private Double primaServicios;
-    private Double cesantias;
-    private Double interesesCesantias;
-    private Double vacaciones;
+    private String salarioBase;
+    private String primaServicios;
+    private String cesantias;
+    private String interesesCesantias;
+    private String vacaciones;
     private Employee employee;
 
-    public Double getSalario() {
+    public String getSalario() {
         return salario;
     }
 
-    public Double getAuxilio() {
+    public String getAuxilio() {
         return auxilio;
     }
 
@@ -44,35 +44,35 @@ public class Liquidacion {
         return diasLaborados;
     }
 
-    public Double getSalarioBase() {
+    public String getSalarioBase() {
         return salarioBase;
     }
 
-    public Double getPrimaServicios() {
+    public String getPrimaServicios() {
         return primaServicios;
     }
 
-    public Double getCesantias() {
+    public String getCesantias() {
         return cesantias;
     }
 
-    public Double getInteresesCesantias() {
+    public String getInteresesCesantias() {
         return interesesCesantias;
     }
 
-    public Double getVacaciones() {
+    public String getVacaciones() {
         return vacaciones;
     }
 
-    public Double getAuxTransporte() {
+    public String getAuxTransporte() {
         return auxTransporte;
     }
 
-    public Double getBono() {
+    public String getBono() {
         return bono;
     }
 
-    public Double getTotalLiquidacion() {
+    public String getTotalLiquidacion() {
         return totalLiquidacion;
     }
 
@@ -80,15 +80,15 @@ public class Liquidacion {
         return employee;
     }
 
-    private Double auxTransporte;
-    private Double bono;
-    private Double totalLiquidacion;
+    private String auxTransporte;
+    private String bono;
+    private String totalLiquidacion;
 
 
-    public Liquidacion(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
-                       int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias,
-                       Double interesesCesantias, Double vacaciones, Double auxTransporte,
-                       Double bono, Double totalLiquidacion, Employee employee) {
+    public Liquidacion(String salario, String auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
+                       int diasLaborados, String salarioBase, String primaServicios, String cesantias,
+                       String interesesCesantias, String vacaciones, String auxTransporte,
+                       String bono, String totalLiquidacion, Employee employee) {
         this.salario = salario;
         this.auxilio = auxilio;
         this.fechaInicio = fechaInicio;

@@ -12,4 +12,6 @@ public interface IHistorySalaryRepository {
 
     List<HistorySalary> findHistoryByEmployee(EmployeeDBO employeeDBO);
 
+    void deleteAllByEmployee(EmployeeDBO employeeDBO);
+
 }

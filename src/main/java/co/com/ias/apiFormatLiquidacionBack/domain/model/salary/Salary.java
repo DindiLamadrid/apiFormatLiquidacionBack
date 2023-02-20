@@ -1,15 +1,21 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.salary;
 
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 import static org.springframework.util.Assert.notNull;
 
+@NoArgsConstructor
 public class Salary {
 
     private Long id;
-    private final Double salary;
+    private Double salary;
+
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 
     @DateTimeFormat()
     private LocalDate fechaModificacion;

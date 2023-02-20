@@ -1,10 +1,8 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.gateway;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.historysalary.HistorySalary;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
-import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.LiquidacionDBO;
 
 import java.util.List;
 

@@ -33,5 +33,10 @@ public class HistorySalaryRepositoryAdapter implements IHistorySalaryRepository 
         return iHistorySalaryRepositoryAdapter.findByEmployeeDBO(employeeDBO).stream().map(HistorySalaryDBO::toDomain).
                 collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteAllByEmployee(EmployeeDBO employeeDBO){
+        iHistorySalaryRepositoryAdapter.deleteAllByEmployeeDBO(employeeDBO);
+    }
 }
 

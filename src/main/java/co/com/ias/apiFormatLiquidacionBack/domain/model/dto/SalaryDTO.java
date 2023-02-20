@@ -4,7 +4,6 @@ import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 public class SalaryDTO {

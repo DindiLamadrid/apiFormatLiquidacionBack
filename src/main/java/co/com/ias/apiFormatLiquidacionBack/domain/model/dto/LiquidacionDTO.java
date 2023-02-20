@@ -14,19 +14,19 @@ public class LiquidacionDTO {
     private LocalDate fechaFin;
     private String motivo;
     private Integer id;
-    private Double aux_transporte;
-    private Double auxilio;
-    private Double bono;
-    private Double cesantias;
+    private String aux_transporte;
+    private String auxilio;
+    private String bono;
+    private String cesantias;
     private Integer dias_laborados;
     private LocalDate fecha_fin;
-    private LocalDate decha_inicio;
-    private Double intereses_cesantias;
-    private Double prima_servicios;
-    private Double salario;
-    private Double salario_base;
-    private Double total_liquidacion;
-    private Double vacaciones;
+    private LocalDate fecha_inicio;
+    private String intereses_cesantias;
+    private String prima_servicios;
+    private String salario;
+    private String salario_base;
+    private String total_liquidacion;
+    private String vacaciones;
     private Integer employee;
 
 
@@ -58,7 +58,11 @@ public class LiquidacionDTO {
         this.employee = employee;
     }
 
-    public LiquidacionDTO(Long idEmployee, LocalDate fechaFin, String motivo, Integer id, Double aux_transporte, Double auxilio, Double bono, Double cesantias, Integer dias_laborados, LocalDate fecha_fin, LocalDate decha_inicio, Double intereses_cesantias, Double prima_servicios, Double salario, Double salario_base, Double total_liquidacion, Double vacaciones, Integer employee) {
+    public LiquidacionDTO(Long idEmployee, LocalDate fechaFin, String motivo, Integer id, String aux_transporte,
+                          String auxilio, String bono, String cesantias, Integer dias_laborados,
+                          LocalDate fecha_fin, LocalDate fecha_inicio, String intereses_cesantias,
+                          String prima_servicios, String salario, String salario_base, String total_liquidacion,
+                          String vacaciones, Integer employee) {
         this.idEmployee = idEmployee;
         this.fechaFin = fechaFin;
         this.motivo = motivo;
@@ -69,7 +73,7 @@ public class LiquidacionDTO {
         this.cesantias = cesantias;
         this.dias_laborados = dias_laborados;
         this.fecha_fin = fecha_fin;
-        this.decha_inicio = decha_inicio;
+        this.fecha_inicio = fecha_inicio;
         this.intereses_cesantias = intereses_cesantias;
         this.prima_servicios = prima_servicios;
         this.salario = salario;
@@ -101,11 +105,126 @@ public class LiquidacionDTO {
                 liquidacion.getDiasLaborados());
     }
 
-    public static Liquidacion toDomain(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
-                                       int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias, Double interesesCesantias,
-                                       Double vacaciones, Double auxTransporte, Double bono, Double totalLiquidacion, Employee employee) {
+    public static Liquidacion toDomain(String salario, String auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
+                                       int diasLaborados, String salarioBase, String primaServicios, String cesantias, String interesesCesantias,
+                                       String vacaciones, String auxTransporte, String bono, String totalLiquidacion, Employee employee) {
         return new Liquidacion(salario, auxilio, fechaInicio, fechaFin, motivo, diasLaborados, salarioBase, primaServicios,
                 cesantias, interesesCesantias, vacaciones, auxTransporte, bono, totalLiquidacion, employee);
     }
 
+    public void setIdEmployee(Long idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getAux_transporte() {
+        return aux_transporte;
+    }
+
+    public void setAux_transporte(String aux_transporte) {
+        this.aux_transporte = aux_transporte;
+    }
+
+    public String getAuxilio() {
+        return auxilio;
+    }
+
+    public void setAuxilio(String auxilio) {
+        this.auxilio = auxilio;
+    }
+
+    public String getBono() {
+        return bono;
+    }
+
+    public void setBono(String bono) {
+        this.bono = bono;
+    }
+
+    public String getCesantias() {
+        return cesantias;
+    }
+
+    public void setCesantias(String cesantias) {
+        this.cesantias = cesantias;
+    }
+
+    public Integer getDias_laborados() {
+        return dias_laborados;
+    }
+
+    public void setDias_laborados(Integer dias_laborados) {
+        this.dias_laborados = dias_laborados;
+    }
+
+    public LocalDate getFecha_fin() {
+        return fecha_fin;
+    }
+
+    public void setFecha_fin(LocalDate fecha_fin) {
+        this.fecha_fin = fecha_fin;
+    }
+
+    public LocalDate getFecha_inicio() {
+        return fecha_inicio;
+    }
+
+    public void setFecha_inicio(LocalDate fecha_inicio) {
+        this.fecha_inicio = fecha_inicio;
+    }
+
+    public String getIntereses_cesantias() {
+        return intereses_cesantias;
+    }
+
+    public void setIntereses_cesantias(String intereses_cesantias) {
+        this.intereses_cesantias = intereses_cesantias;
+    }
+
+    public String getPrima_servicios() {
+        return prima_servicios;
+    }
+
+    public void setPrima_servicios(String prima_servicios) {
+        this.prima_servicios = prima_servicios;
+    }
+
+    public String getSalario() {
+        return salario;
+    }
+
+    public void setSalario(String salario) {
+        this.salario = salario;
+    }
+
+    public String getSalario_base() {
+        return salario_base;
+    }
+
+    public void setSalario_base(String salario_base) {
+        this.salario_base = salario_base;
+    }
+
+    public String getTotal_liquidacion() {
+        return total_liquidacion;
+    }
+
+    public void setTotal_liquidacion(String total_liquidacion) {
+        this.total_liquidacion = total_liquidacion;
+    }
+
+    public String getVacaciones() {
+        return vacaciones;
+    }
+
+    public void setVacaciones(String vacaciones) {
+        this.vacaciones = vacaciones;
+    }
 }

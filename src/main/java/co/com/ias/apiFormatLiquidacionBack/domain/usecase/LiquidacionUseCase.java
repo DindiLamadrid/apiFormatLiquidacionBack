@@ -7,6 +7,7 @@ import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ILiquidacionRepo
 import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LiquidacionUseCase {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
     private final ILiquidacionRepository iLiquidacionRepository;
     private final IEmployeeRepository iEmployeeRepository;
 
@@ -27,39 +31,43 @@ public class LiquidacionUseCase {
         Employee employee = this.iEmployeeRepository.findEmployeeById(liquidacionDTO.getIdEmployee());
 
         //variables
-        Double primaServicio = 0d;
-        Double cesantias = 0d;
-        Double interesesCesantias = 0d;
-        Double vacaciones = 0d;
-        Double auxTransporte = 0d;
-        Double bono = 0d;
-        Double totalLiquidacion = 0d;
+        double primaServicio;
+        double cesantias;
+        double interesesCesantias;
+        double vacaciones;
+        double auxTransporte;
+        double bono = 0d;
+        double totalLiquidacion;
 
         Double salaryBase = employeeById.getSalary().getSalary();
         LocalDate startDate = employeeById.getStartDate().getValue();
         Period period = Period.between(startDate, liquidacionDTO.getFechaFin());
         int diasLaborados = period.getDays();
-        int primeraño = diasLaborados % 360;
+        int primerAño = diasLaborados % 360;
 
         if ("VOLUNTARIO".equals(liquidacionDTO.getMotivo()) || "JUSTIFICADO".equals(liquidacionDTO.getMotivo())) {
-            primaServicio = (salaryBase * (diasLaborados / 6)) / 360;
-            cesantias = (salaryBase * (diasLaborados)) / 360;
-            interesesCesantias = cesantias * (diasLaborados * 0.12) / 360;
-            vacaciones = salaryBase * (diasLaborados / 720);
-            auxTransporte = (double) (102854 / 30);
+            primaServicio = (salaryBase * diasLaborados) / 360;
+            cesantias = (salaryBase * diasLaborados) / 360;
+            interesesCesantias = (cesantias * diasLaborados * 0.12) / 360;
+            vacaciones = (salaryBase * diasLaborados) / 720;
+            auxTransporte = 102854;
+            totalLiquidacion = primaServicio + cesantias + interesesCesantias + vacaciones + auxTransporte;
         } else {
-            primaServicio = (salaryBase * (diasLaborados / 6)) / 360;
-            cesantias = (salaryBase * (diasLaborados)) / 360;
-            interesesCesantias = cesantias * (diasLaborados * 0.12) / 360;
-            vacaciones = salaryBase * (diasLaborados / 720);
-            auxTransporte = (double) (102854 / 30);
-            bono = (salaryBase) + (salaryBase * 20 * primeraño);
+            primaServicio = (salaryBase * diasLaborados) / 360;
+            cesantias = (salaryBase * diasLaborados) / 360;
+            interesesCesantias = (cesantias * diasLaborados * 0.12) / 360;
+            vacaciones = (salaryBase * diasLaborados) / 720;
+            auxTransporte = 102854;
+            if (diasLaborados > 360) {
+                bono = salaryBase + ((salaryBase / 30) * 20) * primerAño;
+            }
+            totalLiquidacion = primaServicio + cesantias + interesesCesantias + vacaciones + auxTransporte + bono;
         }
 
 
-        Liquidacion liquidacion = LiquidacionDTO.toDomain(salaryBase, auxTransporte, startDate, liquidacionDTO.getFechaFin(),
-                liquidacionDTO.getMotivo(), diasLaborados, salaryBase, primaServicio, cesantias, interesesCesantias,
-                vacaciones, auxTransporte, bono, totalLiquidacion, employee);
+        Liquidacion liquidacion = LiquidacionDTO.toDomain(df.format(salaryBase), df.format(auxTransporte), startDate, liquidacionDTO.getFechaFin(),
+                liquidacionDTO.getMotivo(), diasLaborados, df.format(salaryBase), df.format(primaServicio), df.format(cesantias), df.format(interesesCesantias),
+                df.format(vacaciones), df.format(auxTransporte), df.format(bono), df.format(totalLiquidacion), employee);
         return LiquidacionDTO.fromDomain(this.iLiquidacionRepository.saveLiquidacion(liquidacion, employee));
     }
 

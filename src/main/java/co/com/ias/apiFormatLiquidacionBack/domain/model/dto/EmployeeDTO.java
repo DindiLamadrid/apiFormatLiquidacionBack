@@ -31,6 +31,10 @@ public class EmployeeDTO {
         this.status = status;
     }
 
+    public void setSalary(Salary salary) {
+        this.salary = salary;
+    }
+
     public Salary getSalary() {
         return salary;
     }

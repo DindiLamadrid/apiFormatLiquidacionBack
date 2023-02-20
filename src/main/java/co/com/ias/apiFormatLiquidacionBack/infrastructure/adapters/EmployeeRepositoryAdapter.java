@@ -6,6 +6,7 @@ import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IHistorySalaryRe
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.ISalaryRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 @Repository
+@Transactional
 @AllArgsConstructor
 public class EmployeeRepositoryAdapter implements IEmployeeRepository {
 
@@ -65,6 +67,7 @@ public class EmployeeRepositoryAdapter implements IEmployeeRepository {
         AtomicReference<Boolean> bool = new AtomicReference<>(false);
         Optional<EmployeeDBO> dbo = iEmployeeRepositoryAdapter.findById(id);
         dbo.ifPresent(value -> {
+            iHistorySalaryRepository.deleteAllByEmployee(dbo.get());
             iEmployeeRepositoryAdapter.deleteById(id);
             bool.set(true);
         });

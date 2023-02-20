@@ -9,4 +9,6 @@ import java.util.List;
 public interface IHistorySalaryRepositoryAdapter extends JpaRepository<HistorySalaryDBO, Long> {
 
     List<HistorySalaryDBO> findByEmployeeDBO(EmployeeDBO employeeDBO);
+
+    void deleteAllByEmployeeDBO(EmployeeDBO employeeDBO);
 }

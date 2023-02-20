@@ -17,28 +17,28 @@ public class LiquidacionDBO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private Double salario;
-    private Double auxilio;
+    private String salario;
+    private String auxilio;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private String motivo;
     private int diasLaborados;
-    private Double salarioBase;
-    private Double primaServicios;
-    private Double cesantias;
-    private Double interesesCesantias;
-    private Double vacaciones;
-    private Double auxTransporte;
-    private Double bono;
-    private Double totalLiquidacion;
+    private String salarioBase;
+    private String primaServicios;
+    private String cesantias;
+    private String interesesCesantias;
+    private String vacaciones;
+    private String auxTransporte;
+    private String bono;
+    private String totalLiquidacion;
     @ManyToOne
     @JoinColumn(name = "Employee")
     private EmployeeDBO employeeDBO;
 
 
-    public LiquidacionDBO(Double salario, Double auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
-                          int diasLaborados, Double salarioBase, Double primaServicios, Double cesantias, Double interesesCesantias,
-                          Double vacaciones, Double auxTransporte, Double bono, Double totalLiquidacion, EmployeeDBO employeeDBO) {
+    public LiquidacionDBO(String salario, String auxilio, LocalDate fechaInicio, LocalDate fechaFin, String motivo,
+                          int diasLaborados, String salarioBase, String primaServicios, String cesantias, String interesesCesantias,
+                          String vacaciones, String auxTransporte, String bono, String totalLiquidacion, EmployeeDBO employeeDBO) {
         this.salario = salario;
         this.auxilio = auxilio;
         this.fechaInicio = fechaInicio;

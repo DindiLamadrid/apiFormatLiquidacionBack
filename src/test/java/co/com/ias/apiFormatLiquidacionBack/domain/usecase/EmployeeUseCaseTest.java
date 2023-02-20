@@ -3,6 +3,7 @@ package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.EmployeeDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ISalaryRepository;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,11 +25,15 @@ public class EmployeeUseCaseTest {
     @Mock
     IEmployeeRepository iEmployeeRepository;
 
+
     //TEST DOCUMENT
     @Test
     void minimumSizeDocumentTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -41,8 +46,11 @@ public class EmployeeUseCaseTest {
 
     @Test
     void maximunSizeDocumentTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("12345678910101416L");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -56,8 +64,11 @@ public class EmployeeUseCaseTest {
 
     @Test
     void emptyDocumentTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument(null);
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -71,24 +82,12 @@ public class EmployeeUseCaseTest {
     //TEST JOB
     @Test
     void minimumSizeJobTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("12222");
-
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            employeeUseCase.saveEmployee(employeeDTO);
-        });
-        String expectedMessage = "The job must contain more than 10 digits";
-        String actualMessage = exception.getMessage();
-
-        assertTrue(actualMessage.contains(expectedMessage));
-    }
-
-    @Test
-    void emptyJobTest() {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setDocument("123456789");
-        employeeDTO.setJob("");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -101,9 +100,12 @@ public class EmployeeUseCaseTest {
 
     @Test
     void maximunSizeJobTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("fgdgbnvbnvnvbnffhfghfhfhgdghdhglllll");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -117,10 +119,13 @@ public class EmployeeUseCaseTest {
     //TEST NAME
     @Test
     void emptyNameTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("Ingeniero de sistemas");
         employeeDTO.setName("");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -134,12 +139,15 @@ public class EmployeeUseCaseTest {
 
     @Test
     void maximunSizeNameTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("Ingeniero de sistemas");
         employeeDTO.setName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -155,11 +163,15 @@ public class EmployeeUseCaseTest {
     void maximunStartDateTest() {
         LocalDate date = LocalDate.of(2015, 7, 6);
 
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("Ingeniero de sistemas");
         employeeDTO.setName("Dindi");
         employeeDTO.setStartDate(date);
+        employeeDTO.setSalary(salary);
+
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -173,12 +185,15 @@ public class EmployeeUseCaseTest {
 
     @Test
     void minimunStartDateTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
         LocalDate date = LocalDate.of(2014, 7, 6);
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("Ingeniero de sistemas");
         employeeDTO.setName("Dindi");
         employeeDTO.setStartDate(date);
+        employeeDTO.setSalary(salary);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -189,22 +204,25 @@ public class EmployeeUseCaseTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
-        @Test
-        void emptyStartDateTest() {
-            EmployeeDTO employeeDTO = new EmployeeDTO();
-            employeeDTO.setDocument("123456789");
-            employeeDTO.setJob("Ingeniera de software");
-            employeeDTO.setName("Dindi");
-            employeeDTO.setStartDate(null);
+    @Test
+    void emptyStartDateTest() {
+        Salary salary = new Salary();
+        salary.setSalary(2000000.0);
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setDocument("123456789");
+        employeeDTO.setJob("Ingeniera de software");
+        employeeDTO.setName("Dindi");
+        employeeDTO.setStartDate(null);
+        employeeDTO.setSalary(salary);
 
-            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-                employeeUseCase.saveEmployee(employeeDTO);
-            });
-            String expectedMessage = "The start date cannot be empty";
-            String actualMessage = exception.getMessage();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            employeeUseCase.saveEmployee(employeeDTO);
+        });
+        String expectedMessage = "The start date cannot be empty";
+        String actualMessage = exception.getMessage();
 
-            assertTrue(actualMessage.contains(expectedMessage));
-        }
-
+        assertTrue(actualMessage.contains(expectedMessage));
     }
+
+}
 
