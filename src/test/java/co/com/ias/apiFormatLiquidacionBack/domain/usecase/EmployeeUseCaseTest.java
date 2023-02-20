@@ -1,6 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.EmployeeDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.EmployeeDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ISalaryRepository;
 import org.junit.jupiter.api.Test;
@@ -74,6 +74,21 @@ public class EmployeeUseCaseTest {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setDocument("123456789");
         employeeDTO.setJob("12222");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            employeeUseCase.saveEmployee(employeeDTO);
+        });
+        String expectedMessage = "The job must contain more than 10 digits";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void emptyJobTest() {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setDocument("123456789");
+        employeeDTO.setJob("");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             employeeUseCase.saveEmployee(employeeDTO);
@@ -178,7 +193,7 @@ public class EmployeeUseCaseTest {
         void emptyStartDateTest() {
             EmployeeDTO employeeDTO = new EmployeeDTO();
             employeeDTO.setDocument("123456789");
-            employeeDTO.setJob("Ingeniero de sistemas");
+            employeeDTO.setJob("Ingeniera de software");
             employeeDTO.setName("Dindi");
             employeeDTO.setStartDate(null);
 

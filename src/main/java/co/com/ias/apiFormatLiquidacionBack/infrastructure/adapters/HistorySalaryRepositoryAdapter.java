@@ -9,7 +9,6 @@ import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.db
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

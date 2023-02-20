@@ -1,4 +1,4 @@
-package co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto;
+package co.com.ias.apiFormatLiquidacionBack.domain.model.dto;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.*;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
@@ -101,6 +101,5 @@ public class EmployeeDTO {
                 new StartDate(employeeDTO.getStartDate()), salaryDTO, employeeDTO.getStatus()
         );
     }
-
 
 }

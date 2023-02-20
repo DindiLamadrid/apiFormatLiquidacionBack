@@ -3,7 +3,6 @@ package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ISalaryRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.ISalaryRepositoryAdapter;
-import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.EmployeeDBO;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo.SalaryDBO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;

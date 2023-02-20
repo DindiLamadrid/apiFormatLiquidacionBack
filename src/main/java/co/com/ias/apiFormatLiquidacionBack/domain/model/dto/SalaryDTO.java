@@ -1,4 +1,4 @@
-package co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto;
+package co.com.ias.apiFormatLiquidacionBack.domain.model.dto;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import lombok.NoArgsConstructor;

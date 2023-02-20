@@ -1,10 +1,10 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ILiquidacionRepository;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto.LiquidacionDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.LiquidacionDTO;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -81,8 +81,4 @@ public class LiquidacionUseCase {
         return iLiquidacionRepository.deleteLiquidacion(id);
     }
 
-//    public LiquidacionDTO updateLiquidacion(LiquidacionDTO liquidacionDTO) {
-//        Liquidacion liquidacion = liquidacionDTO.toDomain(liquidacionDTO);
-//        return LiquidacionDTO.fromDomain(iLiquidacionRepository.updateLiquidacion(liquidacion));
-//    }
 }

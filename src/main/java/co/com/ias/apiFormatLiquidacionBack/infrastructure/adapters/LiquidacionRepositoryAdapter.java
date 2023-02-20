@@ -1,7 +1,7 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ILiquidacionRepository;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.IEmployeeRepositoryAdapter;
 import co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.ILiquidacionRepositoryAdapter;

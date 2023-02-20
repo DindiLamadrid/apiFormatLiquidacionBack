@@ -1,6 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.adapters.jpa.entity.dbo;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import jakarta.persistence.*;
 import lombok.*;
 

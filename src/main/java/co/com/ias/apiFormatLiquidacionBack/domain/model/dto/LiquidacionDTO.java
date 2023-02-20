@@ -1,8 +1,8 @@
-package co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto;
+package co.com.ias.apiFormatLiquidacionBack.domain.model.dto;
 
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDate;
@@ -34,24 +34,12 @@ public class LiquidacionDTO {
         return motivo;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
     public Long getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(Long idEmployee) {
-        this.idEmployee = idEmployee;
-    }
-
     public LocalDate getFechaFin() {
         return fechaFin;
-    }
-
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
     }
 
     public Integer getId() {
@@ -60,110 +48,6 @@ public class LiquidacionDTO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Double getAux_transporte() {
-        return aux_transporte;
-    }
-
-    public void setAux_transporte(Double aux_transporte) {
-        this.aux_transporte = aux_transporte;
-    }
-
-    public Double getAuxilio() {
-        return auxilio;
-    }
-
-    public void setAuxilio(Double auxilio) {
-        this.auxilio = auxilio;
-    }
-
-    public Double getBono() {
-        return bono;
-    }
-
-    public void setBono(Double bono) {
-        this.bono = bono;
-    }
-
-    public Double getCesantias() {
-        return cesantias;
-    }
-
-    public void setCesantias(Double cesantias) {
-        this.cesantias = cesantias;
-    }
-
-    public Integer getDias_laborados() {
-        return dias_laborados;
-    }
-
-    public void setDias_laborados(Integer dias_laborados) {
-        this.dias_laborados = dias_laborados;
-    }
-
-    public LocalDate getFecha_fin() {
-        return fecha_fin;
-    }
-
-    public void setFecha_fin(LocalDate fecha_fin) {
-        this.fecha_fin = fecha_fin;
-    }
-
-    public LocalDate getDecha_inicio() {
-        return decha_inicio;
-    }
-
-    public void setDecha_inicio(LocalDate decha_inicio) {
-        this.decha_inicio = decha_inicio;
-    }
-
-    public Double getIntereses_cesantias() {
-        return intereses_cesantias;
-    }
-
-    public void setIntereses_cesantias(Double intereses_cesantias) {
-        this.intereses_cesantias = intereses_cesantias;
-    }
-
-    public Double getPrima_servicios() {
-        return prima_servicios;
-    }
-
-    public void setPrima_servicios(Double prima_servicios) {
-        this.prima_servicios = prima_servicios;
-    }
-
-    public Double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(Double salario) {
-        this.salario = salario;
-    }
-
-    public Double getSalario_base() {
-        return salario_base;
-    }
-
-    public void setSalario_base(Double salario_base) {
-        this.salario_base = salario_base;
-    }
-
-    public Double getTotal_liquidacion() {
-        return total_liquidacion;
-    }
-
-    public void setTotal_liquidacion(Double total_liquidacion) {
-        this.total_liquidacion = total_liquidacion;
-    }
-
-    public Double getVacaciones() {
-        return vacaciones;
-    }
-
-    public void setVacaciones(Double vacaciones) {
-        this.vacaciones = vacaciones;
     }
 
     public Integer getEmployee() {

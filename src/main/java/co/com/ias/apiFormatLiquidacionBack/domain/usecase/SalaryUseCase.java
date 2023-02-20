@@ -1,6 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto.SalaryDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.SalaryDTO;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ISalaryRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;

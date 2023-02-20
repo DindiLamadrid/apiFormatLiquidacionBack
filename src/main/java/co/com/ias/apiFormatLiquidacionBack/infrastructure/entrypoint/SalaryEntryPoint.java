@@ -1,6 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.entrypoint;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto.SalaryDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.SalaryDTO;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.usecase.SalaryUseCase;
 import lombok.AllArgsConstructor;

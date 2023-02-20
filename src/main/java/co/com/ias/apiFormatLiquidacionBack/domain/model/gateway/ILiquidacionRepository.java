@@ -1,7 +1,7 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.gateway;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.Liquidacion.dto.Liquidacion;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.liquidacion.Liquidacion;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface ILiquidacionRepository {
 
     Liquidacion saveLiquidacion(Liquidacion liquidacion, Employee employee);
 
-    Liquidacion updateLiquidacion(Liquidacion liquidacion);
+    abstract Liquidacion updateLiquidacion(Liquidacion liquidacion);
 
     List<Liquidacion> findAllLiquidacion();
 

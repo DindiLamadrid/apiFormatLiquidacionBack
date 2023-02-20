@@ -1,7 +1,7 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.usecase;
 
 import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.Employee;
-import co.com.ias.apiFormatLiquidacionBack.domain.model.employee.dto.EmployeeDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.EmployeeDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.IEmployeeRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.gateway.ISalaryRepository;
 import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
@@ -54,7 +54,6 @@ public class EmployeeUseCase {
             Salary salary = employeeDb.getSalary();
             employee.setSalary(salary);
         } else {
-//            Salary newSalary = employee.getSalary();
             Salary newSalary = new Salary(employee.getSalary().getValue());
             newSalary = this.iSalaryRepository.saveSalary(newSalary);
             employee.setSalary(newSalary);

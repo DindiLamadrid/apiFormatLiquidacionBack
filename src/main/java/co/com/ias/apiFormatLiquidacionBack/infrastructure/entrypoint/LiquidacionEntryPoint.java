@@ -1,6 +1,6 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.entrypoint;
 
-import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.dto.LiquidacionDTO;
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.LiquidacionDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.usecase.LiquidacionUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -5,10 +5,6 @@ import org.springframework.util.Assert;
 
 import java.util.regex.Pattern;
 
-import static org.springframework.util.Assert.notEmpty;
-import static org.springframework.util.Assert.notNull;
-
-
 public class Name {
     private final String value;
 
