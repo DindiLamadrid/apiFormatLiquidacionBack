@@ -4,6 +4,8 @@ import co.com.ias.apiFormatLiquidacionBack.domain.model.salary.Salary;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Salary")
 @Builder
@@ -16,20 +18,22 @@ public class SalaryDBO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSalary;
     private Double salaryValue;
+    private LocalDateTime fechaModificacion;
 
-    public SalaryDBO(Long idSalary, Double salaryValue) {
+    public SalaryDBO(Long idSalary, Double salaryValue, LocalDateTime fechaModificacion) {
         this.idSalary = idSalary;
         this.salaryValue = salaryValue;
+        this.fechaModificacion = fechaModificacion;
     }
 
     public static Salary toDomain(SalaryDBO salaryDBO) {
-        return new Salary(salaryDBO.getIdSalary(), salaryDBO.getSalaryValue()
+        return new Salary(salaryDBO.getIdSalary(), salaryDBO.getSalaryValue(), salaryDBO.getFechaModificacion()
         );
     }
     public static SalaryDBO fromDomain(Salary salary) {
         return new SalaryDBO(
                 salary.getId(),
-                salary.getValue()
+                salary.getValue(), salary.getFechaModificacion()
         );
     }
 }

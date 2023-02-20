@@ -1,11 +1,19 @@
 package co.com.ias.apiFormatLiquidacionBack.domain.model.salary;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.util.Assert.notNull;
 
 public class Salary {
 
     private Long id;
     private final Double value;
+
+    private LocalDateTime fechaModificacion;
+
+    public void setFechaModificacion(LocalDateTime fechaModificacion) {
+        this.fechaModificacion = fechaModificacion;
+    }
 
     public Long getId() {
         return id;
@@ -17,6 +25,10 @@ public class Salary {
 
     public Double getValue() {
         return value;
+    }
+
+    public LocalDateTime getFechaModificacion() {
+        return fechaModificacion;
     }
 
     public Salary(Double value) {
@@ -33,8 +45,9 @@ public class Salary {
         this.value = value;
     }
 
-    public Salary(Long id, double value) {
+    public Salary(Long id, double value, LocalDateTime fechaModificacion) {
         this.id = id;
         this.value = value;
+        this.fechaModificacion = fechaModificacion;
     }
 }

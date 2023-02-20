@@ -1,10 +1,13 @@
 package co.com.ias.apiFormatLiquidacionBack.infrastructure.entrypoint;
 
+import co.com.ias.apiFormatLiquidacionBack.domain.model.dto.HistorySalaryDTO;
 import co.com.ias.apiFormatLiquidacionBack.domain.usecase.HistorySalaryUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/historysalary")
@@ -15,7 +18,8 @@ public class HistorySalaryEntryPoint {
 
     @GetMapping("/getAllSalariesById/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity(historySalaryUseCase.findSalaryById(id), HttpStatus.OK);
+        List<HistorySalaryDTO> historySalaryDTOS = historySalaryUseCase.findSalaryById(id);
+        return new ResponseEntity<>(historySalaryDTOS, HttpStatus.OK);
     }
 }
 
